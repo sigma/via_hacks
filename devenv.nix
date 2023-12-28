@@ -16,8 +16,4 @@
   ];
 
   languages.jsonnet.enable = true;
-
-  pre-commit.hooks = {
-    typos.enable = true;
-  };
 }
