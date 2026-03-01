@@ -122,7 +122,7 @@ function() {
 
             get:: function(label)
                 local idx = std.find(label, self.keys);
-                std.format("USER%02d", idx[0]),
+                std.format("CUSTOM(%d)", idx[0]),
         },
     },
 }

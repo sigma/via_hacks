@@ -33,7 +33,8 @@
 //   30720-30726  QK_BACKLIGHT
 //   30752-30772  RGB
 //   31744-31864  QK_QUANTUM (boot, auto-shift, space cadet, unicode, haptic, ...)
-//   32320-32767  QK_USER / CUSTOM
+//   32256-32319  QK_KB (keyboard-level custom, used by VIA CUSTOM(n))
+//   32320-32767  QK_USER (user-level custom)
 
 local simple = {
   // -----------------------------------------------------------------------
@@ -702,18 +703,21 @@ local split_first_comma(s) =
 //     LCA_T LSA_T LSG_T LAG_T LCAG_T MEH_T HYPR_T RCA_T RSA_T RCG_T RCAG_T
 //
 //   User keycodes:
-//     CUSTOM(n) / USERnn  32320 + n
+//     CUSTOM(n)   32256 + n  (QK_KB range, used by VIA/Keychron)
+//     USERnn      32320 + n  (QK_USER range)
 // -------------------------------------------------------------------------
 local encode(str) =
   if std.objectHas(simple, str) then
     simple[str]
 
   // -----------------------------------------------------------------------
-  // User / Custom keycodes: QK_USER = 32320
+  // Custom keycodes
+  //   CUSTOM(n) -> QK_KB_0 + n = 0x7E00 + n  (keyboard-level, used by VIA)
+  //   USERnn    -> QK_USER_0 + nn = 0x7E40 + nn (user-level)
   // -----------------------------------------------------------------------
   else if std.startsWith(str, 'CUSTOM(') then
     local n = std.parseInt(extract_parens(str));
-    32320 + n
+    32256 + n
   else if std.startsWith(str, 'USER') then
     local nn = std.parseInt(std.substr(str, 4, std.length(str) - 4));
     32320 + nn
