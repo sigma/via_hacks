@@ -19,11 +19,14 @@ layers for myself (I don't use windows anyway).
 The project uses [just](https://github.com/casey/just) as a build system. Available targets:
 
 ```sh
-just          # build all keymaps
-just q1-max   # build Q1 Max keymap only
-just k8-pro   # build K8 Pro keymap only
-just clean    # remove build output
-just --list   # list available targets
+just                # build all keymaps (VIA + Launcher)
+just q1-max         # build Q1 Max VIA keymap
+just k8-pro         # build K8 Pro VIA keymap
+just launcher       # build all Launcher keymaps
+just launcher-q1-max  # build Q1 Max Launcher keymap
+just launcher-k8-pro  # build K8 Pro Launcher keymap
+just clean          # remove build output
+just --list         # list available targets
 ```
 
 Compiled JSON files are written to `out/` by default. Use `OUTPUT` to write to a different directory:
@@ -32,9 +35,25 @@ Compiled JSON files are written to `out/` by default. Use `OUTPUT` to write to a
 just q1-max OUTPUT=~/Documents
 ```
 
+## Output formats
+
+Each keyboard definition (`yhodique_*.jsonnet`) supports two output formats, selected via a top-level argument:
+
+- **VIA** (default) — JSON for the [VIA](https://usevia.app/) configurator.
+- **Launcher** — JSON for the [Keychron Launcher](https://launcher.keychron.com/) web tool.
+
+```sh
+jsonnet yhodique_q1_max.jsonnet                        # VIA format
+jsonnet --tla-str format=launcher yhodique_q1_max.jsonnet  # Launcher format
+```
+
 ## Loading into VIA
 
-The generated files are meant to be used with [VIA](https://usevia.app/):
+The VIA-format files are meant to be used with [VIA](https://usevia.app/):
 
 1. **Design tab** — Load the resource file (from `resources/`, also copied to the output directory) to define the keyboard model in the UI.
 2. **Configure tab** — Load the generated keymap JSON to apply the key layout.
+
+## Loading into Keychron Launcher
+
+The Launcher-format files can be imported into the [Keychron Launcher](https://launcher.keychron.com/). See [docs/keychron-launcher.md](docs/keychron-launcher.md) for details on the format.
