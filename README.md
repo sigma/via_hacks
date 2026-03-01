@@ -26,8 +26,15 @@ just clean    # remove build output
 just --list   # list available targets
 ```
 
-Compiled JSON files are written to `out/` by default and can be imported into VIA. Use `OUTPUT` to write to a different directory:
+Compiled JSON files are written to `out/` by default. Use `OUTPUT` to write to a different directory:
 
 ```sh
 just q1-max OUTPUT=~/Documents
 ```
+
+## Loading into VIA
+
+The generated files are meant to be used with [VIA](https://usevia.app/):
+
+1. **Design tab** — Load the resource file (from `resources/`, also copied to the output directory) to define the keyboard model in the UI.
+2. **Configure tab** — Load the generated keymap JSON to apply the key layout.
