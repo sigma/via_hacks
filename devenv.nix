@@ -2,7 +2,7 @@
 
 {
   # https://devenv.sh/packages/
-  packages = [ pkgs.git pkgs.jsonnet ];
+  packages = [ pkgs.git pkgs.jsonnet pkgs.just ];
 
   devcontainer.enable = true;
   devcontainer.settings.customizations.vscode.extensions = [
