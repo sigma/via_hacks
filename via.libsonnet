@@ -16,6 +16,17 @@ local _layer = function(keys)
 
     pad:: function(padder)
       _layer(padder(keys)),
+
+    override:: function(overrides)
+      _layer([
+        if overrides[i] == null then self.keys[i]
+        else [
+          if overrides[i][j] == null then self.keys[i][j]
+          else overrides[i][j]
+          for j in std.range(0, std.length(self.keys[i]) - 1)
+        ]
+        for i in std.range(0, std.length(self.keys) - 1)
+      ]),
   };
 
 function()
