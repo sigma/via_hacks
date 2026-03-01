@@ -16,4 +16,5 @@
   ];
 
   languages.jsonnet.enable = true;
+  env.JSONNET_PATH = "vendor";
 }
