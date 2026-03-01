@@ -1,3 +1,4 @@
+local keycodes = import 'keycodes.libsonnet';
 local via = (import 'via.libsonnet')();
 local k8_pro = (import 'k8-pro.libsonnet')();
 
@@ -33,5 +34,5 @@ local cfg = {
   ], kbd.padder),
 };
 
-function()
-  cfg
+function(format='via')
+  keycodes.output(format, cfg, kbd.matrix)

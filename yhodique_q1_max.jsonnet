@@ -1,3 +1,4 @@
+local keycodes = import 'keycodes.libsonnet';
 local via = (import 'via.libsonnet')();
 local q1_max = (import 'q1-max.libsonnet')();
 
@@ -51,5 +52,5 @@ local cfg = {
   ]
 };
 
-function()
-  cfg
+function(format='via')
+  keycodes.output(format, cfg, kbd.matrix)

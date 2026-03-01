@@ -5,6 +5,7 @@ function() {
 
         name:: 'Keychron Q1 Max ANSI Knob',
         id:: 875825168,
+        matrix:: { rows: 6, cols: 15, encoder_keys: 8 },
 
         default_macros:: function()
             via.block('', 16),
