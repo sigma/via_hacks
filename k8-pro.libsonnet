@@ -1,6 +1,7 @@
 function() {
     new:: function(via) {
-        local ______ = "KC_NO",
+        local ______ = "KC_TRNS",
+        local xxxxxx = "KC_NO",
 
         name:: 'Keychron K8 Pro',
         id:: 875823744,
@@ -34,12 +35,12 @@ function() {
             local BL = self.custom_keys.get("Battery Level");
 
             via.layer([
-                [ ______,    'KC_F1','KC_F2','KC_F3','KC_F4',  'KC_F5','KC_F6','KC_F7','KC_F8',  'KC_F9','KC_F10','KC_F11','KC_F12',       ______, ______,'RGB_TOG'],
-                [ ______,BT1, BT2, BT3,  ______, ______, ______, ______, ______, ______,  ______,  ______,  ______,        ______,         ______, ______, ______  ],
-                ['RGB_TOG','RGB_MOD','RGB_VAI','RGB_HUI','RGB_SAI','RGB_SPI',______,______,______,______,______,______,______,______,      ______, ______, ______  ],
-                [______,'RGB_RMOD','RGB_VAD','RGB_HUD','RGB_SAD','RGB_SPD', ______, ______, ______, ______, ______, ______, ______                                 ],
-                [______,    ______,   ______,   ______,   ______,   BL,   ______,   ______,   ______,   ______,   ______,   ______,                ______          ],
-                [______,______,______,                           ______,                                ______,______,______,______,       ______, ______, ______  ],
+                [ xxxxxx,    'KC_F1','KC_F2','KC_F3','KC_F4',  'KC_F5','KC_F6','KC_F7','KC_F8',  'KC_F9','KC_F10','KC_F11','KC_F12',       xxxxxx, xxxxxx,'RGB_TOG'],
+                [ xxxxxx,BT1, BT2, BT3,  xxxxxx, xxxxxx, xxxxxx, xxxxxx, xxxxxx, xxxxxx,  xxxxxx,  xxxxxx,  xxxxxx,        xxxxxx,         xxxxxx, xxxxxx, xxxxxx  ],
+                ['RGB_TOG','RGB_MOD','RGB_VAI','RGB_HUI','RGB_SAI','RGB_SPI',xxxxxx,xxxxxx,xxxxxx,xxxxxx,xxxxxx,xxxxxx,xxxxxx,xxxxxx,      xxxxxx, xxxxxx, xxxxxx  ],
+                [xxxxxx,'RGB_RMOD','RGB_VAD','RGB_HUD','RGB_SAD','RGB_SPD', xxxxxx, xxxxxx, xxxxxx, xxxxxx, xxxxxx, xxxxxx, xxxxxx                                 ],
+                [xxxxxx,    xxxxxx,   xxxxxx,   xxxxxx,   xxxxxx,   BL,   xxxxxx,   xxxxxx,   xxxxxx,   xxxxxx,   xxxxxx,   xxxxxx,                xxxxxx          ],
+                [xxxxxx,xxxxxx,xxxxxx,                           xxxxxx,                                xxxxxx,xxxxxx,xxxxxx,xxxxxx,       xxxxxx, xxxxxx, xxxxxx  ],
             ]),
 
         default_win_layer:: function()
