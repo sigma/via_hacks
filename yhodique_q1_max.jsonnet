@@ -40,17 +40,6 @@ local cfg = {
         [xxxxxx,xxxxxx,xxxxxx,                           xxxxxx,                                xxxxxx,xxxxxx,xxxxxx,xxxxxx,        xxxxxx, xxxxxx, xxxxxx  ],
       ]),
 
-    // my controls for rectangle window management
-    rect_layer:: function()
-      via.layer([
-        [ 'LCAG(KC_ESC)',  xxxxxx,xxxxxx,xxxxxx,xxxxxx,  xxxxxx,xxxxxx,xxxxxx,xxxxxx,  xxxxxx,xxxxxx,xxxxxx,xxxxxx, 'LCAG(KC_PSCR)', xxxxxx],
-        [ 'LCAG(KC_GRV)',  'LCAG(KC_1)','LCAG(KC_2)','LCAG(KC_3)','LCAG(KC_4)','LCAG(KC_5)','LCAG(KC_6)', xxxxxx, xxxxxx, xxxxxx, xxxxxx, 'LCAG(KC_MINS)', 'LCAG(KC_EQL)',  'LCAG(KC_BSPC)', xxxxxx],
-        ['LCAG(KC_TAB)', xxxxxx, 'LCAG(KC_W)',    'LCAG(KC_E)', xxxxxx, 'LCAG(KC_T)', xxxxxx, 'LCAG(KC_U)',    'LCAG(KC_I)', xxxxxx, 'LCAG(KC_P)', xxxxxx, xxxxxx, 'LCAG(KC_BSLS)', xxxxxx],
-        [xxxxxx, 'LCAG(KC_A)',    'LCAG(KC_S)',    'LCAG(KC_D)', xxxxxx, xxxxxx, xxxxxx, 'LCAG(KC_J)',    'LCAG(KC_K)', xxxxxx, xxxxxx, xxxxxx, 'LCAG(KC_ENT)', xxxxxx],
-        [xxxxxx, xxxxxx, xxxxxx, 'LCAG(KC_C)', xxxxxx, 'LCAG(KC_B)', 'LCAG(KC_N)', 'LCAG(KC_M)', xxxxxx, xxxxxx, xxxxxx, xxxxxx, 'LCAG(KC_UP)'],
-        [xxxxxx, xxxxxx, xxxxxx, 'LCAG(KC_SPC)', xxxxxx, xxxxxx, xxxxxx, 'LCAG(KC_LEFT)', 'LCAG(KC_DOWN)', 'LCAG(KC_RGHT)'],
-      ]),
-
   name: kbd.name,
   vendorProductId: kbd.id,
   macros: kbd.default_macros(),
@@ -58,7 +47,7 @@ local cfg = {
     self.default_layer(),
     self.fn_layer(),
     kbd.default_win_layer(), // just fall back to normal qwerty if the windows switch is activated
-    self.rect_layer(),
+    kbd.default_win_fn_layer(),
   ], kbd.padder),
   encoders: [
     [

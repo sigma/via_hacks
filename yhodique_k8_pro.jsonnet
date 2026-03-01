@@ -14,6 +14,7 @@ local cfg = {
       local LC = kbd.custom_keys.get("Left Cmd");
       local RO = kbd.custom_keys.get("Right Option");
       local RC = kbd.custom_keys.get("Right Cmd");
+      local HYPR = 'LM(0, MOD_LGUI | MOD_LCTL | MOD_LALT)';
 
       via.layer([
         ['KC_ESC', 'KC_BRID','KC_BRIU',MC,LP, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU',     SS,        SI,     'RGB_MOD'],
@@ -21,7 +22,7 @@ local cfg = {
         ['KC_TAB',  'KC_Q','KC_W','KC_E','KC_R','KC_T','KC_Y','KC_U','KC_I','KC_O','KC_P', 'KC_LBRC', 'KC_RBRC', 'KC_BSLS',      'KC_DEL',  'KC_END',  'KC_PGDN'],
         ['MT(MOD_LCTL,KC_ENT)','KC_A','KC_S','KC_D','KC_F','KC_G','KC_H','KC_J','KC_K','KC_L','KC_SCLN','KC_QUOT','MT(MOD_RCTL,KC_ENT)'                         ],
         ['KC_LSPO',     'KC_Z','KC_X','KC_C','KC_V','KC_B','KC_N','KC_M', 'KC_COMM', 'KC_DOT', 'KC_SLSH',       'KC_RSPC',                  'KC_UP'             ],
-        ['MO(3)',LC,LO,                           'KC_SPC',                                       RO,RC,'MO(1)','MO(3)',         'KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
+        [HYPR,LC,LO,                           'KC_SPC',                                       RO,RC,'MO(1)',HYPR,         'KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
       ]),
 
     // same as kbd.default_mac_fn_layer but without transparent keys
@@ -40,17 +41,6 @@ local cfg = {
         [xxxxxx,xxxxxx,xxxxxx,                           xxxxxx,                                xxxxxx,xxxxxx,xxxxxx,xxxxxx,       xxxxxx, xxxxxx, xxxxxx  ],
       ]),
 
-    // my controls for rectangle window management
-    rect_layer:: function()
-      via.layer([
-        [ xxxxxx,  xxxxxx,xxxxxx,xxxxxx,xxxxxx,  xxxxxx,xxxxxx,xxxxxx,xxxxxx,  xxxxxx,xxxxxx,xxxxxx,xxxxxx, 'HYPR(KC_PSCR)', xxxxxx, xxxxxx],
-        [ xxxxxx,  'HYPR(KC_1)','HYPR(KC_2)','HYPR(KC_3)','HYPR(KC_4)','HYPR(KC_5)','HYPR(KC_6)', xxxxxx, xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_MINS)', 'HYPR(KC_EQL)',  'HYPR(KC_BSPC)', 'HYPR(KC_INS)',  'HYPR(KC_HOME)', 'HYPR(KC_PGUP)'],
-        [xxxxxx, xxxxxx, 'HYPR(KC_W)',    'HYPR(KC_E)', xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_U)',    'HYPR(KC_I)', xxxxxx, xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_BSLS)', 'HYPR(KC_DEL)',  'HYPR(KC_END)',  'HYPR(KC_PGDN)'],
-        [xxxxxx, 'HYPR(KC_A)',    'HYPR(KC_S)',    'HYPR(KC_D)', xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_J)',    'HYPR(KC_K)', xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_ENT)'],
-        [xxxxxx, xxxxxx, xxxxxx, xxxxxx, xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_M)', xxxxxx, xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_UP)'],
-        [xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_SPC)', xxxxxx, xxxxxx, xxxxxx, xxxxxx, 'HYPR(KC_LEFT)', 'HYPR(KC_DOWN)', 'HYPR(KC_RGHT)'],
-      ]),
-
   name: kbd.name,
   vendorProductId: kbd.id,
   macros: kbd.default_macros(),
@@ -58,7 +48,7 @@ local cfg = {
     self.default_layer(),
     self.fn_layer(),
     via.default_tkl_qwerty(), // just fall back to normal qwerty if the windows switch is activated
-    self.rect_layer(),
+    kbd.default_win_fn_layer(),
   ], kbd.padder),
 };
 
