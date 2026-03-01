@@ -47,7 +47,7 @@ local cfg = {
   layers: via.layers([
     self.default_layer(),
     self.fn_layer(),
-    via.default_tkl_qwerty(), // just fall back to normal qwerty if the windows switch is activated
+    kbd.default_win_layer(),
     kbd.default_win_fn_layer(),
   ], kbd.padder),
 };
