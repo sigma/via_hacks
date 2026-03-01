@@ -1,6 +1,6 @@
 function() {
     new:: function(via) {
-        local ______ = "KC_TRNS",
+        local ______ = "KC_NO",
 
         name:: 'Keychron K8 Pro',
         id:: 875823744,
