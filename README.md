@@ -26,4 +26,8 @@ just clean    # remove build output
 just --list   # list available targets
 ```
 
-Compiled JSON files are written to `out/` and can be imported into VIA.
+Compiled JSON files are written to `out/` by default and can be imported into VIA. Use `OUTPUT` to write to a different directory:
+
+```sh
+just q1-max OUTPUT=~/Documents
+```

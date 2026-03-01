@@ -1,4 +1,5 @@
 export JSONNET_PATH := "vendor"
+OUTPUT := "out"
 
 default: build
 
@@ -7,14 +8,14 @@ build: q1-max k8-pro
 
 # Compile Q1 Max keymap
 q1-max:
-    mkdir -p out
-    jsonnet yhodique_q1_max.jsonnet > out/yhodique_q1_max.json
+    mkdir -p {{OUTPUT}}
+    jsonnet yhodique_q1_max.jsonnet > {{OUTPUT}}/yhodique_q1_max.json
 
 # Compile K8 Pro keymap
 k8-pro:
-    mkdir -p out
-    jsonnet yhodique_k8_pro.jsonnet > out/yhodique_k8_pro.json
+    mkdir -p {{OUTPUT}}
+    jsonnet yhodique_k8_pro.jsonnet > {{OUTPUT}}/yhodique_k8_pro.json
 
 # Remove build output
 clean:
-    rm -rf out
+    rm -rf {{OUTPUT}}
