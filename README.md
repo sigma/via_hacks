@@ -29,7 +29,7 @@ just clean          # remove build output
 just --list         # list available targets
 ```
 
-Compiled JSON files are written to `out/` by default. Use `OUTPUT` to write to a different directory:
+Compiled JSON files are written to `out/via/` and `out/launcher/` by default. Use `OUTPUT` to write to a different directory:
 
 ```sh
 just q1-max OUTPUT=~/Documents
@@ -51,8 +51,8 @@ jsonnet --tla-str format=launcher keyboards/q1_max.jsonnet  # Launcher format
 
 The VIA-format files are meant to be used with [VIA](https://usevia.app/):
 
-1. **Design tab** — Load the resource file (from `resources/`, also copied to the output directory) to define the keyboard model in the UI.
-2. **Configure tab** — Load the generated keymap JSON to apply the key layout.
+1. **Design tab** — Load the resource file (from `resources/`, also copied to `out/via/`) to define the keyboard model in the UI.
+2. **Configure tab** — Load the generated keymap JSON from `out/via/` to apply the key layout.
 
 ## Loading into Keychron Launcher
 
