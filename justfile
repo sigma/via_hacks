@@ -4,13 +4,16 @@ OUTPUT := "out"
 default: build
 
 # Compile all jsonnet keymaps to JSON
-build: q1-max k8-pro launcher
+build: via launcher
+
+# Compile VIA keymaps
+via: via-q1-max via-k8-pro
 
 # Compile Q1 Max keymap
-q1-max: (_build-via "q1_max")
+via-q1-max: (_build-via "q1_max")
 
 # Compile K8 Pro keymap
-k8-pro: (_build-via "k8_pro")
+via-k8-pro: (_build-via "k8_pro")
 
 # Compile Keychron Launcher keymaps
 launcher: launcher-q1-max launcher-k8-pro
@@ -32,7 +35,7 @@ _build-via keyboard:
         vid=$(printf '%d' "$(jq -r '.vendorId' "$f")")
         pid=$(printf '%d' "$(jq -r '.productId' "$f")")
         if [ $(( vid * 65536 + pid )) -eq "$vpid" ]; then
-            cp "$f" {{OUTPUT}}/via/
+            cp "$f" {{OUTPUT}}/via/{{keyboard}}_design.json
             exit 0
         fi
     done

@@ -51,8 +51,8 @@ jsonnet --tla-str format=launcher keyboards/q1_max.jsonnet  # Launcher format
 
 The VIA-format files are meant to be used with [VIA](https://usevia.app/):
 
-1. **Design tab** — Load the resource file (from `resources/`, also copied to `out/via/`) to define the keyboard model in the UI.
-2. **Configure tab** — Load the generated keymap JSON from `out/via/` to apply the key layout.
+1. **Design tab** — Load the design file (`out/via/<model>_design.json`) to define the keyboard model in the UI.
+2. **Configure tab** — Load the keymap file (`out/via/<model>.json`) to apply the key layout.
 
 ## Loading into Keychron Launcher
 
