@@ -37,14 +37,14 @@ just q1-max OUTPUT=~/Documents
 
 ## Output formats
 
-Each keyboard definition (`yhodique_*.jsonnet`) supports two output formats, selected via a top-level argument:
+Each keyboard definition (`keyboards/*.jsonnet`) supports two output formats, selected via a top-level argument:
 
 - **VIA** (default) — JSON for the [VIA](https://usevia.app/) configurator.
 - **Launcher** — JSON for the [Keychron Launcher](https://launcher.keychron.com/) web tool.
 
 ```sh
-jsonnet yhodique_q1_max.jsonnet                        # VIA format
-jsonnet --tla-str format=launcher yhodique_q1_max.jsonnet  # Launcher format
+jsonnet keyboards/q1_max.jsonnet                        # VIA format
+jsonnet --tla-str format=launcher keyboards/q1_max.jsonnet  # Launcher format
 ```
 
 ## Loading into VIA
