@@ -2,7 +2,7 @@
 
 {
   # https://devenv.sh/packages/
-  packages = [ pkgs.git pkgs.jsonnet pkgs.just ];
+  packages = [ pkgs.git pkgs.jq pkgs.jsonnet pkgs.just ];
 
   devcontainer.enable = true;
   devcontainer.settings.customizations.vscode.extensions = [
@@ -16,5 +16,5 @@
   ];
 
   languages.jsonnet.enable = true;
-  env.JSONNET_PATH = "vendor";
+  env.JSONNET_PATH = "lib:vendor";
 }
