@@ -153,9 +153,47 @@ just launcher-k8-pro    # K8 Pro only
 
 Import the generated JSON files from `out/` into the Keychron Launcher web app.
 
+## Keycode Version Translation
+
+The K8 Pro uses pre-refactor QMK firmware (~0.17.x, Keychron fork) whose numeric
+keycode values differ from the post-refactor values (0.19+) used by the Q1 Max.
+The `keycodes.libsonnet` library handles this via a table-driven translation step.
+
+### How It Works
+
+Each keyboard's matrix definition can include a `keycode_version` field:
+
+```jsonnet
+matrix:: { rows: 6, cols: 17, encoder_keys: 8, keycode_version: 'legacy' },
+```
+
+When `keycode_version` is `'legacy'`, `to_launcher()` wraps `encode()` with a
+`translate()` function that converts current keycode values to their legacy
+equivalents. When omitted or set to `'current'`, values pass through unchanged.
+
+The translation uses three mechanisms:
+
+1. **`legacy_ranges`** — a sorted array of `[current_start, current_end,
+   legacy_start]` entries. For a value in `[start, end]`: `legacy_val =
+   legacy_start + (val - current_start)`. A `null` legacy_start means the
+   keycode is not available in legacy firmware.
+
+2. **`legacy_keycodes`** — an object mapping `string(current_val)` to
+   `legacy_val` for individual keycodes where the order changed between
+   versions (e.g., backlight, auto-shift, magic keycodes).
+
+3. **`translate_layer_mod(val)`** — a special-case function for QK_LAYER_MOD,
+   which changed encoding format (4-bit mods in legacy vs 5-bit in current).
+
+### Legacy Firmware Notes
+
+Keychron's legacy firmware removed `BL_BRTG` from the flat enum, shifting all
+keycodes after `BL_STEP` (23745) by -1 compared to standard QMK 0.18.0. The
+legacy values in the translation tables account for this Keychron-specific shift.
+
 ## Keyboard Matrix Dimensions
 
-| Keyboard | Rows | Cols | Encoder Keys | Keys/Layer |
-|----------|------|------|-------------|------------|
-| Q1 Max | 6 | 15 | 8 | 98 |
-| K8 Pro | 6 | 17 | 8 | 110 |
+| Keyboard | Rows | Cols | Encoder Keys | Keys/Layer | Keycode Version |
+|----------|------|------|-------------|------------|-----------------|
+| Q1 Max | 6 | 15 | 8 | 98 | current |
+| K8 Pro | 6 | 17 | 8 | 110 | legacy |

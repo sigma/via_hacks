@@ -852,6 +852,177 @@ local encode(str) =
   else
     error 'Unknown keycode: ' + str;
 
+// ---------------------------------------------------------------------------
+// Legacy keycode translation tables (pre-refactor QMK ~0.17.x, Keychron fork)
+//
+// Keychron's legacy firmware removed BL_BRTG from the flat enum, shifting
+// all keycodes after BL_STEP (23745) by -1 compared to standard QMK 0.18.0.
+// The legacy values below account for this.
+// ---------------------------------------------------------------------------
+
+// Sorted array of [current_start, current_end, legacy_start].
+// null legacy_start means "not available in legacy firmware".
+local legacy_ranges = [
+  [0, 255, 0],                    // Basic keycodes
+  [256, 8191, 256],               // QK_MODS
+  [8192, 16383, 24576],           // QK_MOD_TAP
+  [16384, 20479, 16384],          // QK_LAYER_TAP
+  [20992, 21023, 20480],          // QK_TO
+  [21024, 21055, 20736],          // QK_MOMENTARY
+  [21056, 21087, 20992],          // QK_DEF_LAYER
+  [21088, 21119, 21248],          // QK_TOGGLE_LAYER
+  [21120, 21151, 21504],          // QK_ONE_SHOT_LAYER
+  [21152, 21183, 21760],          // QK_ONE_SHOT_MOD
+  [21184, 21215, 22528],          // QK_LAYER_TAP_TOGGLE
+  [22016, 22271, 22016],          // QK_SWAP_HANDS
+  [22272, 22527, 22272],          // QK_TAP_DANCE
+  [29936, 29948, 23088],          // Steno
+  [28928, 28930, 23596],          // MIDI on/off/toggle
+  [28944, 28955, 23599],          // MIDI notes octave 0
+  [28960, 28971, 23611],          // MIDI notes octave 1
+  [28976, 28987, 23623],          // MIDI notes octave 2
+  [28992, 29003, 23635],          // MIDI notes octave 3
+  [29008, 29019, 23647],          // MIDI notes octave 4
+  [29024, 29035, 23659],          // MIDI notes octave 5
+  [29040, 29051, 23671],          // MIDI octave controls
+  [29056, 29070, 23683],          // MIDI transpose
+  [29072, 29084, 23698],          // MIDI velocity
+  [29088, 29105, 23711],          // MIDI channels
+  [29120, 29130, 23729],          // MIDI effects
+  [29824, 29826, 23581],          // Audio AU on/off/toggle
+  [29834, 29845, 23584],          // Audio CK+MU block
+  [30752, 30771, 23746],          // RGB (TOG-RGBTEST)
+  [31776, 31777, 23772],          // Output AUTO/USB
+  [31792, 31798, 23775],          // Unicode modes (NEXT-WINC)
+  [31808, 31820, 23782],          // Haptic
+  [31824, 31826, 23799],          // Combo
+  [31827, 31831, 23811],          // Dynamic Macro
+  [32256, 32319, 24448],          // QK_KB
+  [32320, 32383, 24512],          // QK_USER
+  // Not available in legacy (null base)
+  [30464, 30495, null],           // QK_MACRO
+  [31834, 31836, null],           // One Shot controls
+  [31837, 31839, null],           // Key Override
+  [31840, 31843, null],           // Secure
+  [31856, 31858, null],           // Dynamic Tapping Term
+  [31859, 31864, null],           // CapsWord/AC/TriLayer
+];
+
+// Individual keycodes where the order changed between versions.
+// Maps string(current_val) -> legacy_val (or null if unavailable).
+local legacy_keycodes = {
+  // Backlight (order changed)
+  '30720': 23740,   // BL_ON
+  '30721': 23741,   // BL_OFF
+  '30722': 23744,   // BL_TOGG
+  '30723': 23742,   // BL_DOWN
+  '30724': 23743,   // BL_UP
+  '30725': 23745,   // BL_STEP
+  '30726': 23745,   // BL_BRTG -> BL_STEP (no legacy equivalent)
+  // RGB_MODE_TWINKLE
+  '30772': null,     // position-dependent on Sequencer config
+  // Quantum
+  '31744': 23552,   // QK_BOOTLOADER
+  '31745': null,     // QK_REBOOT (not in legacy)
+  '31746': 23553,   // QK_DEBUG_TOGGLE
+  '31747': 23774,   // QK_CLEAR_EEPROM (Keychron: std 23775 - 1)
+  '31748': null,     // QK_MAKE (not in legacy)
+  // Auto Shift (reordered)
+  '31760': 23576,   // AS_DOWN
+  '31761': 23575,   // AS_UP
+  '31762': 23577,   // AS_RPT
+  '31763': 23579,   // AS_ON
+  '31764': 23580,   // AS_OFF
+  '31765': 23578,   // AS_TOGG
+  // Grave Escape
+  '31766': 23574,   // QK_GRAVE_ESCAPE
+  // Velocikey
+  '31767': 23766,   // VK_TOGG (after BL, Keychron -1)
+  // Space Cadet
+  '31768': 23795,   // SC_LCPO
+  '31769': 23796,   // SC_RCPC
+  '31770': 23767,   // SC_LSPO
+  '31771': 23768,   // SC_RSPC
+  '31772': 23797,   // SC_LAPO
+  '31773': 23798,   // SC_RAPC
+  '31774': 23769,   // SC_SENT
+  // Output BT
+  '31778': 23849,   // OU_BT (Keychron: std 23850 - 1)
+  // Unicode EMACS
+  '31799': null,     // UC_EMAC
+  // Leader/Lock
+  '31832': 23848,   // QK_LEAD (Keychron: std 23849 - 1)
+  '31833': 23850,   // QK_LOCK (Keychron: std 23851 - 1)
+  // Magic keycodes - first batch (before BL block, NO Keychron shift)
+  '28672': 23554,   // SWAP_CONTROL_CAPSLOCK
+  '28673': 23563,   // UNSWAP_CONTROL_CAPSLOCK
+  '28674': null,     // TOGGLE_CONTROL_CAPSLOCK
+  '28675': 23564,   // UNCAPSLOCK_TO_CONTROL
+  '28676': 23555,   // CAPSLOCK_TO_CONTROL
+  '28677': 23556,   // SWAP_LALT_LGUI
+  '28678': 23565,   // UNSWAP_LALT_LGUI
+  '28679': 23557,   // SWAP_RALT_RGUI
+  '28680': 23566,   // UNSWAP_RALT_RGUI
+  '28681': 23567,   // UNNO_GUI
+  '28682': 23558,   // NO_GUI
+  '28683': null,     // TOGGLE_GUI
+  '28684': 23559,   // SWAP_GRAVE_ESC
+  '28685': 23568,   // UNSWAP_GRAVE_ESC
+  '28686': 23560,   // SWAP_BACKSLASH_BACKSPACE
+  '28687': 23569,   // UNSWAP_BACKSLASH_BACKSPACE
+  '28688': null,     // TOGGLE_BACKSLASH_BACKSPACE
+  '28689': 23561,   // HOST_NKRO
+  '28690': 23570,   // UNHOST_NKRO
+  '28691': 23572,   // TOGGLE_NKRO
+  '28692': 23562,   // SWAP_ALT_GUI
+  '28693': 23571,   // UNSWAP_ALT_GUI
+  '28694': 23573,   // TOGGLE_ALT_GUI
+  // Magic keycodes - second batch (after BL, Keychron -1, partially reordered)
+  '28695': 23802,   // SWAP_LCTL_LGUI
+  '28696': 23804,   // UNSWAP_LCTL_LGUI
+  '28697': 23803,   // SWAP_RCTL_RGUI
+  '28698': 23805,   // UNSWAP_RCTL_RGUI
+  '28699': 23806,   // SWAP_CTL_GUI
+  '28700': 23807,   // UNSWAP_CTL_GUI
+  '28701': 23808,   // TOGGLE_CTL_GUI
+  '28702': 23809,   // EE_HANDS_LEFT
+  '28703': 23810,   // EE_HANDS_RIGHT
+  // Magic keycodes - third batch (unknown)
+  '28704': null,     // SWAP_ESCAPE_CAPSLOCK
+  '28705': null,     // UNSWAP_ESCAPE_CAPSLOCK
+  '28706': null,     // TOGGLE_ESCAPE_CAPSLOCK
+};
+
+// QK_LAYER_MOD changed encoding between versions:
+//   Current: 0x5000 | ((layer & 0xF) << 5) | (mods & 0x1F) — 5-bit mods
+//   Legacy:  0x5900 | ((layer & 0xF) << 4) | (mods & 0xF)  — 4-bit mods
+local translate_layer_mod(val) =
+  local off = val - 20480;
+  local layer = std.floor(off / 32) % 16;
+  local mods = off % 32;
+  22784 + (layer * 16) + (mods % 16);
+
+// Translate a current-version keycode value to a legacy-version value.
+// If version != 'legacy', returns val unchanged.
+local translate(val, version) =
+  if version != 'legacy' then val
+  else
+    local key = std.toString(val);
+    if std.objectHas(legacy_keycodes, key) then
+      if legacy_keycodes[key] == null then
+        error 'Keycode ' + key + ' not available in legacy firmware'
+      else legacy_keycodes[key]
+    else if val >= 20480 && val <= 20991 then
+      translate_layer_mod(val)
+    else
+      local matches = [r for r in legacy_ranges if val >= r[0] && val <= r[1]];
+      if std.length(matches) > 0 then
+        if matches[0][2] == null then
+          error 'Keycode ' + std.toString(val) + ' not available in legacy firmware'
+        else matches[0][2] + (val - matches[0][0])
+      else
+        error 'No legacy translation for keycode ' + std.toString(val);
+
 {
   encode:: encode,
 
@@ -865,9 +1036,13 @@ local encode(str) =
     local cols = matrix.cols;
     local rows = matrix.rows;
     local enc_keys = matrix.encoder_keys;
+    local version = if std.objectHas(matrix, 'keycode_version')
+                    then matrix.keycode_version
+                    else 'current';
+    local enc(str) = translate(encode(str), version);
 
     local layer_to_entries(layer) = [
-      { col: i % cols, row: std.floor(i / cols), val: encode(layer[i]) }
+      { col: i % cols, row: std.floor(i / cols), val: enc(layer[i]) }
       for i in std.range(0, std.length(layer) - 1)
     ] + [
       { col: j, row: rows, val: 0 }
