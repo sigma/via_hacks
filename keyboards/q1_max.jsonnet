@@ -1,22 +1,19 @@
 local keycodes = import 'keycodes.libsonnet';
-local keys = import 'keys.libsonnet';
 local via = (import 'via.libsonnet')();
 local q1_max = (import 'q1-max.libsonnet')();
 
 local kbd = q1_max.new(via);
+local keys = (import 'keys.libsonnet')(kbd);
 
 local cfg = {
     default_layer:: function()
-      local LO = kbd.custom_keys.get("Left Option");
-      local LC = kbd.custom_keys.get("Left Cmd");
-
       kbd.default_mac_layer().override([
         null,
         null,
         null,
         [keys.LCTL_ENT, null, null, null, null, null, null, null, null, null, null, null, keys.RCTL_ENT, null],
         [keys.LSPO, null, null, null, null, null, null, null, null, null, null, keys.RSPC, null],
-        [keys.HYPR(0), LC, LO, null, null, null, keys.HYPR(0), null, null, null],
+        [keys.HYPR(0), keys.LC, keys.LO, null, null, null, keys.HYPR(0), null, null, null],
       ]),
 
     fn_layer:: function() kbd.default_mac_fn_layer(),
