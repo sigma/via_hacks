@@ -1,5 +1,6 @@
 function(via) {
-    layers:: function(overrides=[])
+    layers:: function(overrides={})
+        local names = ['default_mac', 'fn_mac', 'default_win', 'fn_win'];
         local defaults = [
             self.default_mac_layer(),
             self.default_mac_fn_layer(),
@@ -7,8 +8,8 @@ function(via) {
             self.default_win_fn_layer(),
         ];
         via.layers([
-            if i < std.length(overrides) && overrides[i] != null then overrides[i]
+            if std.objectHas(overrides, names[i]) then overrides[names[i]]
             else defaults[i]
-            for i in std.range(0, std.length(defaults) - 1)
+            for i in std.range(0, std.length(names) - 1)
         ], self.padder),
 }

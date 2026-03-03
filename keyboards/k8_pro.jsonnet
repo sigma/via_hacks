@@ -16,10 +16,11 @@ local cfg = {
         [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(0), null, null, null],
       ]),
 
+  local dl = self.default_layer(),
   name: kbd.name,
   vendorProductId: kbd.id,
   macros: kbd.default_macros(),
-  layers: kbd.layers([self.default_layer()]),
+  layers: kbd.layers({ default_mac: dl }),
 };
 
 function(format='via')
