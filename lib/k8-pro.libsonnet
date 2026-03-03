@@ -22,14 +22,10 @@ function() {
             local RO = self.custom_keys.get("Right Option");
             local RC = self.custom_keys.get("Right Cmd");
 
-            self.default_win_layer().override([
-                [null, 'KC_BRID','KC_BRIU',MC,LP, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU', SS, SI, null],
-                null,
-                null,
-                null,
-                null,
-                [null, LO, LC, null, RC, RO, 'MO(1)', null, null, null, null],
-            ]),
+            self.default_win_layer().override({
+                '0': [null, 'KC_BRID','KC_BRIU',MC,LP, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU', SS, SI],
+                '5': [null, LO, LC, null, RC, RO, 'MO(1)'],
+            }),
 
         default_mac_fn_layer:: function()
             local BT1 = self.custom_keys.get("Bluetooth Host 1");
@@ -62,14 +58,9 @@ function() {
             local TV = self.custom_keys.get("Task View");
             local FE = self.custom_keys.get("File Explorer");
 
-            self.default_mac_fn_layer().override([
-                [null, 'KC_BRID','KC_BRIU',TV,FE, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU', null, null, null],
-                null,
-                null,
-                null,
-                null,
-                null,
-            ]),
+            self.default_mac_fn_layer().override({
+                '0': [null, 'KC_BRID','KC_BRIU',TV,FE, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU'],
+            }),
 
         // each row is padded to 17 items
         padder:: function(keys) [

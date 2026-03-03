@@ -10,12 +10,12 @@ local _layer = function(keys)
 
     override:: function(overrides)
       _layer([
-        if overrides[i] == null then self.keys[i]
-        else [
-          if overrides[i][j] == null then self.keys[i][j]
-          else overrides[i][j]
+        if std.objectHas(overrides, std.toString(i)) then [
+          if j >= std.length(overrides[std.toString(i)]) || overrides[std.toString(i)][j] == null then self.keys[i][j]
+          else overrides[std.toString(i)][j]
           for j in std.range(0, std.length(self.keys[i]) - 1)
         ]
+        else self.keys[i]
         for i in std.range(0, std.length(self.keys) - 1)
       ]),
   };
