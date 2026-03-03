@@ -1,25 +1,5 @@
-local keycodes = import 'keycodes.libsonnet';
-local via = (import 'via.libsonnet')();
-local q1_max = (import 'q1-max.libsonnet')();
-
-local kbd = q1_max.new(via);
-local keys = (import 'keys.libsonnet')(kbd);
-local layouts = (import 'layouts.libsonnet')(keys, kbd);
-
-local cfg = {
-  default_layer:: function()
-    kbd.default_mac_layer()
-    .override(layouts.symmetrical_ctrl_return)
-    .override(layouts.space_cadet)
-    .override(layouts.hyper_mods(kbd.layer_idx.default_mac)),
-
-  local dl = self.default_layer(),
-  name: kbd.name,
-  vendorProductId: kbd.id,
-  macros: kbd.default_macros(),
-  layers: kbd.layers({ default_mac: dl }),
-  encoders: kbd.default_encoders(),
-};
+local kbd = (import 'q1-max.libsonnet')();
+local common = (import 'common.libsonnet')(kbd);
 
 function(format='via')
-  keycodes.output(format, cfg, kbd.matrix)
+  common.output(format)
