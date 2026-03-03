@@ -21,12 +21,7 @@ local cfg = {
   name: kbd.name,
   vendorProductId: kbd.id,
   macros: kbd.default_macros(),
-  layers: via.layers([
-    self.default_layer(),
-    self.fn_layer(),
-    kbd.default_win_layer(),
-    kbd.default_win_fn_layer(),
-  ], kbd.padder),
+  layers: kbd.layers([self.default_layer(), self.fn_layer()]),
 };
 
 function(format='via')

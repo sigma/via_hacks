@@ -1,5 +1,7 @@
+local keyboard = import 'keyboard.libsonnet';
+
 function() {
-    new:: function(via) {
+    new:: function(via) keyboard(via) + {
         local ______ = "KC_TRNS",
         local xxxxxx = "KC_NO",
 
