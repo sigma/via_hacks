@@ -4,7 +4,7 @@ local k8_pro = (import 'k8-pro.libsonnet')();
 
 local kbd = k8_pro.new(via);
 local keys = (import 'keys.libsonnet')(kbd);
-local layouts = (import 'layouts.libsonnet')(keys, kbd.rows);
+local layouts = (import 'layouts.libsonnet')(keys, kbd);
 
 local cfg = {
   default_layer:: function()

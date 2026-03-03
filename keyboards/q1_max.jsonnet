@@ -4,7 +4,7 @@ local q1_max = (import 'q1-max.libsonnet')();
 
 local kbd = q1_max.new(via);
 local keys = (import 'keys.libsonnet')(kbd);
-local layouts = (import 'layouts.libsonnet')(keys, kbd.rows);
+local layouts = (import 'layouts.libsonnet')(keys, kbd);
 
 local cfg = {
   default_layer:: function()
