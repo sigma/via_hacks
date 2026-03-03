@@ -16,12 +16,10 @@ local cfg = {
         [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(0), null, null, null],
       ]),
 
-    fn_layer:: function() kbd.default_mac_fn_layer(),
-
   name: kbd.name,
   vendorProductId: kbd.id,
   macros: kbd.default_macros(),
-  layers: kbd.layers([self.default_layer(), self.fn_layer()]),
+  layers: kbd.layers([self.default_layer()]),
 };
 
 function(format='via')
