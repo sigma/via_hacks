@@ -8,8 +8,15 @@ function(via) {
     mods: '5',
   },
 
+  local layer_names = ['default_mac', 'fn_mac', 'default_win', 'fn_win'],
+
+  layer_idx:: {
+    [layer_names[i]]: i
+    for i in std.range(0, std.length(layer_names) - 1)
+  },
+
   layers:: function(overrides={})
-    local names = ['default_mac', 'fn_mac', 'default_win', 'fn_win'];
+    local names = layer_names;
     local defaults = [
       self.default_mac_layer(),
       self.default_mac_fn_layer(),

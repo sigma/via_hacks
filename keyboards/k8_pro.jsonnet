@@ -12,7 +12,7 @@ local cfg = {
     .override(layouts.symmetrical_ctrl_return)
     .override(layouts.space_cadet)
     .override({
-      [kbd.rows.mods]: [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(0)],
+      [kbd.rows.mods]: [keys.HYPR(kbd.layer_idx.default_mac), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(kbd.layer_idx.default_mac)],
     }),
 
   local dl = self.default_layer(),
