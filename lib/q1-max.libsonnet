@@ -85,6 +85,15 @@ function() {
             keys[5][4:10],
         ],
 
+        default_encoders:: function() [
+            [
+                ['KC_VOLD', 'KC_VOLU'],
+                ['RGB_VAD', 'RGB_VAI'],
+                ['KC_VOLD', 'KC_VOLU'],
+                ['RGB_VAD', 'RGB_VAI'],
+            ],
+        ],
+
         custom_keys:: {
             keys:: [
                 'Left Option',

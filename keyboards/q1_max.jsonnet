@@ -20,26 +20,7 @@ local cfg = {
   vendorProductId: kbd.id,
   macros: kbd.default_macros(),
   layers: kbd.layers({ default_mac: dl }),
-  encoders: [
-    [
-      [
-        "KC_VOLD",
-        "KC_VOLU"
-      ],
-      [
-        "RGB_VAD",
-        "RGB_VAI"
-      ],
-      [
-        "KC_VOLD",
-        "KC_VOLU"
-      ],
-      [
-        "RGB_VAD",
-        "RGB_VAI"
-      ]
-    ]
-  ]
+  encoders: kbd.default_encoders(),
 };
 
 function(format='via')
