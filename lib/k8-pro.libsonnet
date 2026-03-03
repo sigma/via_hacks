@@ -8,6 +8,7 @@ function() {
     name:: 'Keychron K8 Pro',
     id:: 875823744,
     matrix:: { rows: 6, cols: 17, encoder_keys: 8, keycode_version: 'legacy' },
+    right_mods:: 4,
 
     default_macros:: function()
       via.block('', 16),
