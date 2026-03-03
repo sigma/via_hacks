@@ -13,7 +13,7 @@ local cfg = {
         null,
         [keys.LCTL_ENT, null, null, null, null, null, null, null, null, null, null, null, keys.RCTL_ENT],
         [keys.LSPO, null, null, null, null, null, null, null, null, null, null, keys.RSPC, null],
-        [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR(0), null, null, null],
+        [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(0), null, null, null],
       ]),
 
     fn_layer:: function() kbd.default_mac_fn_layer(),

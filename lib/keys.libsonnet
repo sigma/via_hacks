@@ -1,6 +1,7 @@
 // Common keycode aliases shared across keyboard definitions.
 function(kbd) {
   HYPR(layer):: 'LM(%d, MOD_LGUI | MOD_LCTL | MOD_LALT)' % layer,
+  HYPR_S(layer):: 'LM(%d, MOD_LGUI | MOD_LCTL | MOD_LALT | MOD_LSFT)' % layer,
   LCTL_ENT:: 'MT(MOD_LCTL,KC_ENT)',
   RCTL_ENT:: 'MT(MOD_RCTL,KC_ENT)',
   LSPO:: 'KC_LSPO',
