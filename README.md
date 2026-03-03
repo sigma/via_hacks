@@ -2,7 +2,7 @@
 
 This is a jsonnet-based generator for my Keychron keyboards.
 
-Those are normally managed through the VIA inferface, but it's too limiting.
+Those are normally managed through the VIA interface, but it's too limiting.
 Not only do I not want to click around things, but also some advanced features
 I need are not available from the UI.
 
@@ -19,28 +19,30 @@ layers for myself (I don't use windows anyway).
 The project uses [just](https://github.com/casey/just) as a build system. Available targets:
 
 ```sh
-just                # build all keymaps (VIA + Launcher)
-just q1-max         # build Q1 Max VIA keymap
-just k8-pro         # build K8 Pro VIA keymap
-just launcher       # build all Launcher keymaps
+just                  # build all keymaps (VIA + Launcher)
+just build            # same as above
+just via              # build all VIA keymaps
+just via-q1-max       # build Q1 Max VIA keymap
+just via-k8-pro       # build K8 Pro VIA keymap
+just launcher         # build all Launcher keymaps
 just launcher-q1-max  # build Q1 Max Launcher keymap
 just launcher-k8-pro  # build K8 Pro Launcher keymap
-just clean          # remove build output
-just --list         # list available targets
+just clean            # remove build output
+just --list           # list available targets
 ```
 
 Compiled JSON files are written to `out/via/` and `out/launcher/` by default. Use `OUTPUT` to write to a different directory:
 
 ```sh
-just q1-max OUTPUT=~/Documents
+just via-q1-max OUTPUT=~/Documents
 ```
 
 ## Output formats
 
 Each keyboard definition (`keyboards/*.jsonnet`) supports two output formats, selected via a top-level argument:
 
-- **VIA** (default) — JSON for the [VIA](https://usevia.app/) configurator.
-- **Launcher** — JSON for the [Keychron Launcher](https://launcher.keychron.com/) web tool.
+- **VIA** (default) — JSON for the [VIA](https://usevia.app/) configurator. Keys are represented as symbolic expressions (e.g. `MT(MOD_LCTL,KC_ENT)`).
+- **Launcher** — JSON for the [Keychron Launcher](https://launcher.keychron.com/) web tool. Keys are translated from VIA symbolic expressions into integer keycodes expected by the Launcher format.
 
 ```sh
 jsonnet keyboards/q1_max.jsonnet                        # VIA format
