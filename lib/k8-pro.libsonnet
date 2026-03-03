@@ -13,6 +13,7 @@ function() {
             via.block('', 16),
 
         default_mac_layer:: function()
+            local R = self.rows;
             local MC = self.custom_keys.get("Mission Control");
             local LP = self.custom_keys.get("Launch pad");
             local SS = self.custom_keys.get("Screen shot");
@@ -23,8 +24,8 @@ function() {
             local RC = self.custom_keys.get("Right Cmd");
 
             self.default_win_layer().override({
-                '0': [null, 'KC_BRID','KC_BRIU',MC,LP, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU', SS, SI],
-                '5': [null, LO, LC, null, RC, RO, 'MO(1)'],
+                [R.funcs]: [null, 'KC_BRID','KC_BRIU',MC,LP, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU', SS, SI],
+                [R.mods]: [null, LO, LC, null, RC, RO, 'MO(1)'],
             }),
 
         default_mac_fn_layer:: function()
@@ -55,11 +56,12 @@ function() {
             ]),
 
         default_win_fn_layer:: function()
+            local R = self.rows;
             local TV = self.custom_keys.get("Task View");
             local FE = self.custom_keys.get("File Explorer");
 
             self.default_mac_fn_layer().override({
-                '0': [null, 'KC_BRID','KC_BRIU',TV,FE, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU'],
+                [R.funcs]: [null, 'KC_BRID','KC_BRIU',TV,FE, 'RGB_VAD','RGB_VAI','KC_MPRV','KC_MPLY', 'KC_MNXT','KC_MUTE','KC_VOLD','KC_VOLU'],
             }),
 
         // each row is padded to 17 items

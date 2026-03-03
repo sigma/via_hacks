@@ -4,7 +4,7 @@ local k8_pro = (import 'k8-pro.libsonnet')();
 
 local kbd = k8_pro.new(via);
 local keys = (import 'keys.libsonnet')(kbd);
-local layouts = (import 'layouts.libsonnet')(keys);
+local layouts = (import 'layouts.libsonnet')(keys, kbd.rows);
 
 local cfg = {
     default_layer:: function()
@@ -12,7 +12,7 @@ local cfg = {
         .override(layouts.symmetrical_ctrl_return)
         .override(layouts.space_cadet)
         .override({
-          '5': [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(0)],
+          [kbd.rows.mods]: [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(0)],
         }),
 
   local dl = self.default_layer(),

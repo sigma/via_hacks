@@ -1,4 +1,13 @@
 function(via) {
+    rows:: {
+        funcs: '0',
+        number: '1',
+        upper: '2',
+        home: '3',
+        lower: '4',
+        mods: '5',
+    },
+
     layers:: function(overrides={})
         local names = ['default_mac', 'fn_mac', 'default_win', 'fn_win'];
         local defaults = [

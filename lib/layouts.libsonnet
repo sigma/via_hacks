@@ -1,4 +1,4 @@
-function(keys) {
-  symmetrical_ctrl_return:: { '3': [keys.LCTL_ENT, null, null, null, null, null, null, null, null, null, null, null, keys.RCTL_ENT] },
-  space_cadet:: { '4': [keys.LSPO, null, null, null, null, null, null, null, null, null, null, keys.RSPC] },
+function(keys, rows) {
+  symmetrical_ctrl_return:: { [rows.home]: [keys.LCTL_ENT, null, null, null, null, null, null, null, null, null, null, null, keys.RCTL_ENT] },
+  space_cadet:: { [rows.lower]: [keys.LSPO, null, null, null, null, null, null, null, null, null, null, keys.RSPC] },
 }
