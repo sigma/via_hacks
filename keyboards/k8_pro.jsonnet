@@ -7,13 +7,13 @@ local keys = (import 'keys.libsonnet')(kbd);
 local layouts = (import 'layouts.libsonnet')(keys, kbd.rows);
 
 local cfg = {
-    default_layer:: function()
-      kbd.default_mac_layer()
-        .override(layouts.symmetrical_ctrl_return)
-        .override(layouts.space_cadet)
-        .override({
-          [kbd.rows.mods]: [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(0)],
-        }),
+  default_layer:: function()
+    kbd.default_mac_layer()
+    .override(layouts.symmetrical_ctrl_return)
+    .override(layouts.space_cadet)
+    .override({
+      [kbd.rows.mods]: [keys.HYPR(0), keys.LC, keys.LO, null, keys.RO, keys.RC, null, keys.HYPR_S(0)],
+    }),
 
   local dl = self.default_layer(),
   name: kbd.name,

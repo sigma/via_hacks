@@ -32,8 +32,8 @@ function()
       [s for i in std.range(1, n)],
 
     no:: function(n)
-      self.block("KC_NO", n),
+      self.block('KC_NO', n),
 
     trns:: function(n)
-      self.block("KC_TRNS", n),
+      self.block('KC_TRNS', n),
   }
