@@ -185,6 +185,7 @@ local simple = {
   // -----------------------------------------------------------------------
   KC_NUM_LOCK: 83,
   KC_NUM: 83,
+  KC_NLCK: 83,
   KC_KP_SLASH: 84,
   KC_PSLS: 84,
   KC_KP_ASTERISK: 85,
