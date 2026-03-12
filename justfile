@@ -7,13 +7,16 @@ default: build
 build: via launcher
 
 # Compile VIA keymaps
-via: via-q1-max via-k8-pro
+via: via-q1-max via-k8-pro via-ek21
 
 # Compile Q1 Max keymap
 via-q1-max: (_build-via "q1_max")
 
 # Compile K8 Pro keymap
 via-k8-pro: (_build-via "k8_pro")
+
+# Compile EK21 keymap
+via-ek21: (_build-via "ek21")
 
 # Compile Keychron Launcher keymaps
 launcher: launcher-q1-max launcher-k8-pro
