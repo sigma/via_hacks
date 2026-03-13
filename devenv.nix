@@ -1,14 +1,15 @@
 { pkgs, ... }:
 
 let
+  vitalyVersion = "0.1.32";
   vitaly = pkgs.rustPlatform.buildRustPackage {
     pname = "vitaly";
-    version = "0.1.32";
+    version = vitalyVersion;
 
     src = pkgs.fetchFromGitHub {
       owner = "bskaplou";
       repo = "vitaly";
-      tag = "v0.1.32";
+      tag = "v${vitalyVersion}";
       hash = "sha256-u1OmH2AeskcjNB1ac6iSBaA0Xyea+tB8f5F/LCzafj4=";
     };
 
