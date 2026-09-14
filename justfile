@@ -51,6 +51,11 @@ _build-launcher keyboard:
     mkdir -p {{OUTPUT}}/launcher
     {{JSONNET}} --tla-str format=launcher keyboards/{{keyboard}}.jsonnet > {{OUTPUT}}/launcher/{{keyboard}}.json
 
+# Render the EK21 M8 mapping reference to PDF
+docs-ek21-m8:
+    mkdir -p {{OUTPUT}}/docs
+    pandoc docs/ek21-m8.md --pdf-engine=typst --lua-filter=docs/pandoc/h2-pagebreak.lua --columns=200 -V papersize=a4 -V mainfont="Libertinus Serif" -V monofont="DejaVu Sans Mono" -o {{OUTPUT}}/docs/ek21-m8.pdf
+
 # Remove build output
 clean:
     rm -rf {{OUTPUT}}

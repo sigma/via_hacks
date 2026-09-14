@@ -18,7 +18,8 @@ layers for myself (I don't use windows anyway).
 
 Tooling comes from a Nix flake built on
 [firefly-engineering/toolbox](https://github.com/firefly-engineering/toolbox)
-(`jrsonnet`, `jq`, `just`, `vitaly`). Enter the shell with `nix develop`, or
+(`jrsonnet`, `jq`, `just`, `vitaly`), plus `pandoc` and `typst` from nixpkgs
+for rendering docs to PDF. Enter the shell with `nix develop`, or
 `direnv allow` to have it loaded automatically.
 
 ## Usage
@@ -34,6 +35,7 @@ just via-k8-pro       # build K8 Pro VIA keymap
 just launcher         # build all Launcher keymaps
 just launcher-q1-max  # build Q1 Max Launcher keymap
 just launcher-k8-pro  # build K8 Pro Launcher keymap
+just docs-ek21-m8     # render the EK21 M8 mapping reference to PDF
 just clean            # remove build output
 just --list           # list available targets
 ```
@@ -73,4 +75,5 @@ The Launcher-format files can be imported into the [Keychron Launcher](https://l
 ## EK21 as an M8 controller
 
 The EK21 keymap turns the numpad into a controller for the Dirtywave M8. See
-[docs/ek21-m8.md](docs/ek21-m8.md) for a printable reference of all four layers.
+[docs/ek21-m8.md](docs/ek21-m8.md) for a reference of all four layers;
+`just docs-ek21-m8` renders it to `out/docs/ek21-m8.pdf` for printing.

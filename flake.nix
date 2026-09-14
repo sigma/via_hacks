@@ -48,6 +48,9 @@
               (tool "jrsonnet")
               (tool "just")
               (tool "vitaly")
+              # docs -> PDF; typst is pandoc's PDF engine (no TeX needed)
+              pkgs.pandoc
+              pkgs.typst
             ];
 
             JSONNET_PATH = "lib:vendor";
