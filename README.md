@@ -14,6 +14,13 @@ For example, I need to be able to map:
 Note that I kinda abuse the normal mac/windows layers breakdown, and take 3
 layers for myself (I don't use windows anyway).
 
+## Setup
+
+Tooling comes from a Nix flake built on
+[firefly-engineering/toolbox](https://github.com/firefly-engineering/toolbox)
+(`jrsonnet`, `jq`, `just`, `vitaly`). Enter the shell with `nix develop`, or
+`direnv allow` to have it loaded automatically.
+
 ## Usage
 
 The project uses [just](https://github.com/casey/just) as a build system. Available targets:
@@ -45,9 +52,12 @@ Each keyboard definition (`keyboards/*.jsonnet`) supports two output formats, se
 - **Launcher** — JSON for the [Keychron Launcher](https://launcher.keychron.com/) web tool. Keys are translated from VIA symbolic expressions into integer keycodes expected by the Launcher format.
 
 ```sh
-jsonnet keyboards/q1_max.jsonnet                        # VIA format
-jsonnet --tla-str format=launcher keyboards/q1_max.jsonnet  # Launcher format
+jrsonnet keyboards/q1_max.jsonnet                        # VIA format
+jrsonnet --tla-str format=launcher keyboards/q1_max.jsonnet  # Launcher format
 ```
+
+The justfile calls `jrsonnet`; override with `just JSONNET=jsonnet ...` to use
+another implementation.
 
 ## Loading into VIA
 

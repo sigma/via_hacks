@@ -1,4 +1,5 @@
 export JSONNET_PATH := "lib:vendor"
+JSONNET := "jrsonnet"
 OUTPUT := "out"
 
 default: build
@@ -32,7 +33,7 @@ _build-via keyboard:
     #!/usr/bin/env bash
     set -euo pipefail
     mkdir -p {{OUTPUT}}/via
-    jsonnet keyboards/{{keyboard}}.jsonnet > {{OUTPUT}}/via/{{keyboard}}.json
+    {{JSONNET}} keyboards/{{keyboard}}.jsonnet > {{OUTPUT}}/via/{{keyboard}}.json
     vpid=$(jq '.vendorProductId' {{OUTPUT}}/via/{{keyboard}}.json)
     for f in resources/*.json; do
         vid=$(printf '%d' "$(jq -r '.vendorId' "$f")")
@@ -48,7 +49,7 @@ _build-via keyboard:
 # Build Keychron Launcher keymap
 _build-launcher keyboard:
     mkdir -p {{OUTPUT}}/launcher
-    jsonnet --tla-str format=launcher keyboards/{{keyboard}}.jsonnet > {{OUTPUT}}/launcher/{{keyboard}}.json
+    {{JSONNET}} --tla-str format=launcher keyboards/{{keyboard}}.jsonnet > {{OUTPUT}}/launcher/{{keyboard}}.json
 
 # Remove build output
 clean:
