@@ -69,3 +69,8 @@ The VIA-format files are meant to be used with [VIA](https://usevia.app/):
 ## Loading into Keychron Launcher
 
 The Launcher-format files can be imported into the [Keychron Launcher](https://launcher.keychron.com/). See [docs/keychron-launcher.md](docs/keychron-launcher.md) for details on the format.
+
+## EK21 as an M8 controller
+
+The EK21 keymap turns the numpad into a controller for the Dirtywave M8. See
+[docs/ek21-m8.md](docs/ek21-m8.md) for a printable reference of all four layers.
