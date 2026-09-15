@@ -80,13 +80,14 @@ local m8 = {
   ]),
 
   // Chromatic octave, C at bottom-left, reading left to right then up.
-  // Keys follow the m8c keyjazz layout (Z row = white keys, S row = black).
+  // The app maps the home row to white keys and the row above to black keys:
+  // C C# D D# E F F# G G# A A# B = A W S E D F T G Y H U J, then K for C'.
   notes_layer:: via.layer([
     ['KC_ESC', FN, 'KC_PSLS', 'KC_PAST'],  // keyjazz on/off | octave down / up
-    ['KC_N', 'KC_J', 'KC_M', 'KC_COMM'],  // A  A# B  C'
-    ['KC_G', 'KC_B', 'KC_H', 'KC_X'],  // F# G  G#
-    ['KC_D', 'KC_C', 'KC_V'],  // D# E  F
-    ['KC_Z', 'KC_S', 'KC_X'],  // C  C# D
+    ['KC_H', 'KC_U', 'KC_J', 'KC_K'],  // A  A# B  C'
+    ['KC_T', 'KC_G', 'KC_Y', 'KC_X'],  // F# G  G#
+    ['KC_E', 'KC_D', 'KC_F'],  // D# E  F
+    ['KC_A', 'KC_W', 'KC_S'],  // C  C# D
     bottom_row,
   ]),
 
