@@ -49,6 +49,7 @@ local m8 = {
     // track; instrument: prev/next instrument; selection: fill / randomize.
     { name: 'OPTL', seq: '{KC_Z,KC_LEFT}' },
     { name: 'OPTR', seq: '{KC_Z,KC_RGHT}' },
+    { name: 'BKMK', seq: '{KC_Z}{KC_Z}{KC_Z}' },  // Option x3: toggle chain bookmark (song view)
   ],
 
   M(name)::
@@ -77,7 +78,7 @@ local m8 = {
     [self.M('CLRMS'), self.M('CUE'), self.M('OPTL'), self.M('OPTR')],
     [self.M('PGUP'), 'KC_UP', self.M('PGDN'), 'KC_X'],
     ['KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
-    ['LSFT(KC_LEFT)', 'LSFT(KC_DOWN)', 'LSFT(KC_RGHT)'],
+    [self.M('BKMK'), STOP_ALL, xxxxxx],
     bottom_row,
   ]),
 
