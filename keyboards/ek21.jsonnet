@@ -68,7 +68,7 @@ local m8 = {
     [self.M('NEW'), self.M('CLONE'), 'LSFT(KC_X)', self.M('CUT')],
     [self.M('PGUP'), 'KC_UP', self.M('PGDN'), 'KC_X'],
     ['KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
-    [self.M('OPTL'), self.M('OPTR'), self.M('DCLONE')],
+    [self.M('OPTL'), self.M('DCLONE'), self.M('OPTR')],
     bottom_row,
   ]),
 
@@ -77,7 +77,7 @@ local m8 = {
     [self.M('CLRMS'), self.M('CUE'), self.M('OPTL'), self.M('OPTR')],
     [self.M('PGUP'), 'KC_UP', self.M('PGDN'), 'KC_X'],
     ['KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
-    ['LSFT(KC_LEFT)', 'LSFT(KC_RGHT)', 'LSFT(KC_DOWN)'],
+    ['LSFT(KC_LEFT)', 'LSFT(KC_DOWN)', 'LSFT(KC_RGHT)'],
     bottom_row,
   ]),
 
