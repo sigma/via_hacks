@@ -59,13 +59,13 @@ local m8 = {
   macros:: [m.seq for m in self.macros_list] + via.block('', 16 - std.length(self.macros_list)),
 
   local ______ = 'KC_TRNS',
-  local STOP_ALL = 'LSFT(KC_SPC)',
+  local PLAY_SONG = 'LSFT(KC_SPC)',  // Shift+Play: play all tracks from the song cursor
   local TO(layer) = 'TO(%d)' % layer,
   local FN = 'MO(%d)' % self.layer_idx.fn,
   local bottom_row = ['KC_LSFT', 'KC_SPC', 'KC_Z'],
 
   edit_layer:: via.layer([
-    [STOP_ALL, FN, 'LSFT(KC_Z)', 'KC_Z'],
+    [PLAY_SONG, FN, 'LSFT(KC_Z)', 'KC_Z'],
     [self.M('NEW'), self.M('CLONE'), 'LSFT(KC_X)', self.M('CUT')],
     [self.M('PGUP'), 'KC_UP', self.M('PGDN'), 'KC_X'],
     ['KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
@@ -74,11 +74,11 @@ local m8 = {
   ]),
 
   live_layer:: via.layer([
-    [STOP_ALL, FN, self.M('MUTE'), self.M('SOLO')],
+    [PLAY_SONG, FN, self.M('MUTE'), self.M('SOLO')],
     [self.M('CLRMS'), self.M('CUE'), self.M('OPTL'), self.M('OPTR')],
     [self.M('PGUP'), 'KC_UP', self.M('PGDN'), 'KC_X'],
     ['KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
-    [self.M('BKMK'), STOP_ALL, xxxxxx],
+    [self.M('BKMK'), xxxxxx, xxxxxx],
     bottom_row,
   ]),
 
@@ -95,7 +95,7 @@ local m8 = {
   ]),
 
   fn_layer:: via.layer([
-    [STOP_ALL, ______, 'RGB_TOG', 'RGB_MOD'],  // ______ is the MO(fn) key itself
+    [PLAY_SONG, ______, 'RGB_TOG', 'RGB_MOD'],  // ______ is the MO(fn) key itself
     [C('BLE1'), C('BLE2'), C('BLE3'), C('2.4G')],
     [C('USB'), C('BAT'), self.M('CLRMS'), 'KC_X'],
     [xxxxxx, xxxxxx, xxxxxx],
