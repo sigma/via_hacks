@@ -35,9 +35,9 @@ local m8 = {
     { name: 'CUT', seq: '{KC_X,KC_Z}' },  // Edit+Option: clear / cut value
     { name: 'NEW', seq: '{KC_X}{KC_X}' },  // double-tap Edit: next empty slot
     { name: 'CLONE', seq: '{+KC_LSFT}{KC_Z}{KC_X}{-KC_LSFT}' },  // Shift+[Option, Edit]
+    { name: 'DCLONE', seq: '{+KC_LSFT}{KC_Z}{KC_X}{KC_X}{-KC_LSFT}' },  // Shift+[Option, Edit, Edit]: chain + phrases
     { name: 'PGUP', seq: '{KC_Z,KC_UP}' },  // Option+Up: 16 rows / previous phrase
     { name: 'PGDN', seq: '{KC_Z,KC_DOWN}' },  // Option+Down: 16 rows / next phrase
-    { name: 'HELP', seq: '{KC_X,KC_UP}' },  // Edit+Up on command column
     { name: 'DEC', seq: '{KC_X,KC_LEFT}' },  // Edit+Left: value -1
     { name: 'INC', seq: '{KC_X,KC_RGHT}' },  // Edit+Right: value +1
     // Option released first so the mute / solo is held.
@@ -45,8 +45,10 @@ local m8 = {
     { name: 'SOLO', seq: '{+KC_Z}{+KC_SPC}{-KC_Z}{-KC_SPC}' },  // Option+Play
     { name: 'CLRMS', seq: '{KC_Z,KC_LSFT,KC_SPC}' },  // Option+Shift+Play: clear mutes/solos
     { name: 'CUE', seq: '{KC_LEFT,KC_SPC}' },  // Left+Play: cue selected song row
-    { name: 'SOLOL', seq: '{KC_Z,KC_LEFT}' },  // Option+Left: solo tracks left of cursor
-    { name: 'SOLOR', seq: '{KC_Z,KC_RGHT}' },  // Option+Right: solo tracks right of cursor
+    // Option+Left/Right: song: solo tracks left/right of cursor; phrase: prev/next
+    // track; instrument: prev/next instrument; selection: fill / randomize.
+    { name: 'OPTL', seq: '{KC_Z,KC_LEFT}' },
+    { name: 'OPTR', seq: '{KC_Z,KC_RGHT}' },
   ],
 
   M(name)::
@@ -66,13 +68,13 @@ local m8 = {
     [self.M('NEW'), self.M('CLONE'), 'LSFT(KC_X)', self.M('CUT')],
     [self.M('PGUP'), 'KC_UP', self.M('PGDN'), 'KC_X'],
     ['KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
-    ['LSFT(KC_LEFT)', 'LSFT(KC_RGHT)', self.M('HELP')],
+    [self.M('OPTL'), self.M('OPTR'), self.M('DCLONE')],
     bottom_row,
   ]),
 
   live_layer:: via.layer([
     [STOP_ALL, FN, self.M('MUTE'), self.M('SOLO')],
-    [self.M('CLRMS'), self.M('CUE'), self.M('SOLOL'), self.M('SOLOR')],
+    [self.M('CLRMS'), self.M('CUE'), self.M('OPTL'), self.M('OPTR')],
     [self.M('PGUP'), 'KC_UP', self.M('PGDN'), 'KC_X'],
     ['KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
     ['LSFT(KC_LEFT)', 'LSFT(KC_RGHT)', 'LSFT(KC_DOWN)'],
