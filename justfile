@@ -4,8 +4,8 @@ OUTPUT := "out"
 
 default: build
 
-# Compile all jsonnet keymaps to JSON
-build: via launcher
+# Compile all keymaps and render docs
+build: via launcher docs
 
 # Compile VIA keymaps
 via: via-q1-max via-k8-pro via-ek21
@@ -50,6 +50,9 @@ _build-via keyboard:
 _build-launcher keyboard:
     mkdir -p {{OUTPUT}}/launcher
     {{JSONNET}} --tla-str format=launcher keyboards/{{keyboard}}.jsonnet > {{OUTPUT}}/launcher/{{keyboard}}.json
+
+# Render all docs to PDF
+docs: docs-ek21-m8
 
 # Render the EK21 M8 mapping reference to PDF
 docs-ek21-m8:

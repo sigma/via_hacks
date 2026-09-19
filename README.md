@@ -27,7 +27,7 @@ for rendering docs to PDF. Enter the shell with `nix develop`, or
 The project uses [just](https://github.com/casey/just) as a build system. Available targets:
 
 ```sh
-just                  # build all keymaps (VIA + Launcher)
+just                  # build all keymaps (VIA + Launcher) and docs
 just build            # same as above
 just via              # build all VIA keymaps
 just via-q1-max       # build Q1 Max VIA keymap
@@ -35,6 +35,7 @@ just via-k8-pro       # build K8 Pro VIA keymap
 just launcher         # build all Launcher keymaps
 just launcher-q1-max  # build Q1 Max Launcher keymap
 just launcher-k8-pro  # build K8 Pro Launcher keymap
+just docs             # render all docs to PDF
 just docs-ek21-m8     # render the EK21 M8 mapping reference to PDF
 just clean            # remove build output
 just --list           # list available targets
