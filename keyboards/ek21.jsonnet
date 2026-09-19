@@ -33,7 +33,6 @@ local m8 = {
 
   macros_list:: [
     { name: 'CUT', seq: '{KC_X,KC_Z}' },  // Edit+Option: clear / cut value
-    { name: 'NEW', seq: '{KC_X}{KC_X}' },  // double-tap Edit: next empty slot
     { name: 'CLONE', seq: '{+KC_LSFT}{KC_Z}{KC_X}{-KC_LSFT}' },  // Shift+[Option, Edit]
     { name: 'DCLONE', seq: '{+KC_LSFT}{KC_Z}{KC_X}{KC_X}{-KC_LSFT}' },  // Shift+[Option, Edit, Edit]: chain + phrases
     { name: 'PGUP', seq: '{KC_Z,KC_UP}' },  // Option+Up: 16 rows / previous phrase
@@ -66,10 +65,10 @@ local m8 = {
 
   edit_layer:: via.layer([
     [PLAY_SONG, FN, 'LSFT(KC_Z)', 'KC_Z'],
-    [self.M('NEW'), self.M('CLONE'), 'LSFT(KC_X)', self.M('CUT')],
+    [self.M('DCLONE'), self.M('CLONE'), 'LSFT(KC_X)', self.M('CUT')],
     [self.M('PGUP'), 'KC_UP', self.M('PGDN'), 'KC_X'],
     ['KC_LEFT', 'KC_DOWN', 'KC_RGHT'],
-    [self.M('OPTL'), self.M('DCLONE'), self.M('OPTR')],
+    [self.M('OPTL'), self.M('SOLO'), self.M('OPTR')],
     bottom_row,
   ]),
 
