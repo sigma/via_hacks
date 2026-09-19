@@ -49,7 +49,7 @@ _build-via keyboard:
         pid=$(printf '%d' "$(jq -r '.productId' "$f")")
         if [ $(( vid * 65536 + pid )) -eq "$vpid" ]; then
             cp "$f" {{OUTPUT}}/via/{{keyboard}}_design.json
-            echo "via       {{OUTPUT}}/via/{{keyboard}}.json  {{OUTPUT}}/via/{{keyboard}}_design.json"
+            {{just_executable()}} _report via {{OUTPUT}}/via/{{keyboard}}.json {{OUTPUT}}/via/{{keyboard}}_design.json
             exit 0
         fi
     done
@@ -60,7 +60,7 @@ _build-via keyboard:
 _build-launcher keyboard:
     mkdir -p {{OUTPUT}}/launcher
     {{JSONNET}} --tla-str format=launcher keyboards/{{keyboard}}.jsonnet > {{OUTPUT}}/launcher/{{keyboard}}.json
-    echo "launcher  {{OUTPUT}}/launcher/{{keyboard}}.json"
+    {{just_executable()}} _report launcher {{OUTPUT}}/launcher/{{keyboard}}.json
 
 # Render a Markdown doc to PDF
 _build-doc name:
@@ -68,7 +68,16 @@ _build-doc name:
     pandoc docs/{{name}}.md --pdf-engine=typst --lua-filter=docs/pandoc/h2-pagebreak.lua \
         --columns=200 -V papersize=a4 -V mainfont="Libertinus Serif" -V monofont="DejaVu Sans Mono" \
         -o {{OUTPUT}}/docs/{{name}}.pdf
-    echo "docs      {{OUTPUT}}/docs/{{name}}.pdf"
+    {{just_executable()}} _report docs {{OUTPUT}}/docs/{{name}}.pdf
+
+# Print "<kind>  <artifacts>", coloured when stdout is a terminal
+_report kind +paths:
+    #!/usr/bin/env bash
+    if [ -t 1 ] && [ -z "${NO_COLOR:-}" ]; then
+        printf '\033[1;32m%-9s\033[0m \033[2m%s\033[0m\n' "{{kind}}" "{{paths}}"
+    else
+        printf '%-9s %s\n' "{{kind}}" "{{paths}}"
+    fi
 
 # Remove build output
 clean:
