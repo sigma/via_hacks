@@ -84,10 +84,10 @@ local m8 = {
 
   // Chromatic octave, C at bottom-left, reading left to right then up.
   // The app maps the home row to white keys and the row above to black keys:
-  // C C# D D# E F F# G G# A A# B = A W S E D F T G Y H U J, then K for C'.
+  // C C# D D# E F F# G G# A A# B = A W S E D F T G Y H U J.
   notes_layer:: via.layer([
     ['KC_ESC', FN, 'KC_PSLS', 'KC_PAST'],  // keyjazz on/off | octave down / up
-    ['KC_H', 'KC_U', 'KC_J', 'KC_K'],  // A  A# B  C'
+    ['KC_H', 'KC_U', 'KC_J', self.M('CUT')],  // A  A# B  | clear note / note-off
     ['KC_T', 'KC_G', 'KC_Y', 'KC_X'],  // F# G  G#
     ['KC_E', 'KC_D', 'KC_F'],  // D# E  F
     ['KC_A', 'KC_W', 'KC_S'],  // C  C# D
@@ -113,7 +113,7 @@ local m8 = {
   encoders:: [[
     [self.M('DEC'), self.M('INC')],  // edit: value -1 / +1
     ['KC_UP', 'KC_DOWN'],  // live: scroll rows
-    ['KC_PSLS', 'KC_PAST'],  // notes: octave down / up
+    ['KC_UP', 'KC_DOWN'],  // notes: step through the phrase
     ['RGB_VAD', 'RGB_VAI'],  // fn: brightness
   ]],
 };
